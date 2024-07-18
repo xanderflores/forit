@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Nav from 'react-bootstrap/Nav';
 import "./UsuariosInfo.css";
 /* import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';*/
 
 import ModalNuevoUsuario from "./ModalNuevoUsuario";
 import FilterUser from "./FilterUser";
-import { Button, Card, Container, Row, } from "react-bootstrap";
+import {  Card, Container, Row } from "react-bootstrap";
 const UsuariosInfo = () => {
   const url = "https://jsonplaceholder.typicode.com/users";
   const [usuarios, setUsuarios] = useState([]);
@@ -23,8 +24,9 @@ const UsuariosInfo = () => {
     setUsuarios(respuesta.data);
     setFilteredUsuarios(respuesta.data);
   };
- const handleAgregarUsuario = async (nuevoUsuario) => {
-    const newId = usuarios.length > 0 ? Math.max(...usuarios.map(u => u.id)) + 1 : 1;
+  const handleAgregarUsuario = async (nuevoUsuario) => {
+    const newId =
+      usuarios.length > 0 ? Math.max(...usuarios.map((u) => u.id)) + 1 : 1;
     const updatedUsuarios = [...usuarios, { ...nuevoUsuario, id: newId }];
     setUsuarios([...usuarios, { ...nuevoUsuario, id: newId }]);
     setFilteredUsuarios(updatedUsuarios);
@@ -37,16 +39,21 @@ const UsuariosInfo = () => {
   return (
     <Container fluid>
       <Row className="row">
-        <h1>Usuarios</h1>
+        <h1>Busqueda - Usuarios</h1>
       </Row>
-      
-      <Button variant="primary" onClick={handleShow}>Agregar Usuario</Button>
-      <FilterUser 
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        usuarios={usuarios}
-        setFilteredUsuarios={setFilteredUsuarios}
-      />
+      <Nav variant="tabs" className="nav">
+        <Nav.Item className="nav-item">
+            <Nav.Link className="link" eventKey="link-1"  onClick={handleShow} >Agregar Usuario</Nav.Link>
+        </Nav.Item>
+        <Nav.Item className="nav-item">
+            <FilterUser
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                usuarios={usuarios}
+                setFilteredUsuarios={setFilteredUsuarios}
+            />
+        </Nav.Item>
+    </Nav>
       <Container className="container-cards">
         {filteredUsuarios.map((usuarios, id) => (
           <Card key={usuarios.id} className="card">
@@ -68,10 +75,10 @@ const UsuariosInfo = () => {
         ))}
       </Container>
       <ModalNuevoUsuario
-            show={show}
-            handleClose={handleClose}
-            handleAgregarUsuario={handleAgregarUsuario}
-        />
+        show={show}
+        handleClose={handleClose}
+        handleAgregarUsuario={handleAgregarUsuario}
+      />
     </Container>
   );
 };

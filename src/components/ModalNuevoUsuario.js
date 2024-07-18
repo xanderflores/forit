@@ -1,5 +1,8 @@
 import React,{useState} from "react";
-import { Modal,Button,Form } from "react-bootstrap";
+import { Modal,Button,Form} from "react-bootstrap";
+import './ModalNuevoUsuario.css'
+
+
 const ModalNuevoUsuario = ({ show, handleClose, handleAgregarUsuario }) => {
     const [nuevoUsuario, setNuevoUsuario] = useState({
       name: "",
@@ -9,7 +12,8 @@ const ModalNuevoUsuario = ({ show, handleClose, handleAgregarUsuario }) => {
       phone: "",
       company: { name: "" },
     });
-  
+   
+
     const handleChange = (e) => {
       const { name, value } = e.target;
       const keys = name.split(".");
@@ -35,16 +39,17 @@ const ModalNuevoUsuario = ({ show, handleClose, handleAgregarUsuario }) => {
         company: { name: "" },
       });
       handleClose();
+      
     };
-  
     return (
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} className="modal">
         <Modal.Header closeButton>
           <Modal.Title>Agregar Nuevo Usuario</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group>
+        
+          <Form onSubmit={handleSubmit} className="form">
+            <Form.Group className="form-group-custom">
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
@@ -54,7 +59,7 @@ const ModalNuevoUsuario = ({ show, handleClose, handleAgregarUsuario }) => {
                 required
               />
             </Form.Group>
-            <Form.Group>
+            <Form.Group className="form-group-custom ">
               <Form.Label>Username</Form.Label>
               <Form.Control
                 type="text"
@@ -64,7 +69,7 @@ const ModalNuevoUsuario = ({ show, handleClose, handleAgregarUsuario }) => {
                 required
               />
             </Form.Group>
-            <Form.Group>
+            <Form.Group className="form-group-custom ">
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
@@ -74,7 +79,7 @@ const ModalNuevoUsuario = ({ show, handleClose, handleAgregarUsuario }) => {
                 required
               />
             </Form.Group>
-            <Form.Group>
+            <Form.Group className="form-group-custom ">
               <Form.Label>City</Form.Label>
               <Form.Control
                 type="text"
@@ -84,7 +89,7 @@ const ModalNuevoUsuario = ({ show, handleClose, handleAgregarUsuario }) => {
                 required
               />
             </Form.Group>
-            <Form.Group>
+            <Form.Group className="form-group-custom ">
               <Form.Label>Phone</Form.Label>
               <Form.Control
                 type="text"
@@ -94,7 +99,7 @@ const ModalNuevoUsuario = ({ show, handleClose, handleAgregarUsuario }) => {
                 required
               />
             </Form.Group>
-            <Form.Group>
+            <Form.Group className="form-group-custom ">
               <Form.Label>Company</Form.Label>
               <Form.Control
                 type="text"
@@ -104,7 +109,8 @@ const ModalNuevoUsuario = ({ show, handleClose, handleAgregarUsuario }) => {
                 required
               />
             </Form.Group>
-            <Button type="submit" variant="primary">
+            
+            <Button type="submit"  className="button-custom " style={{ backgroundColor: 'transparent', border: '1px solid #ccc', color: '#000' }}>
               Agregar Usuario
             </Button>
           </Form>
